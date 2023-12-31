@@ -12,5 +12,69 @@ CHIP Mux16 {
     OUT out[16];
 
     PARTS:
-    //// Replace this comment with your code.
+    Not(in=sel, out=notSel);
+
+    And(a=a[0], b=notSel, out=notA0);
+    And(a=sel, b=b[0], out=notB0);
+    Or(a=notA0, b=notB0, out=out[0]);
+
+    And(a=a[1], b=notSel, out=notA1);
+    And(a=sel, b=b[1], out=notB1);
+    Or(a=notA1, b=notB1, out=out[1]);
+
+    And(a=a[2], b=notSel, out=notA2);
+    And(a=sel, b=b[2], out=notB2);
+    Or(a=notA2, b=notB2, out=out[2]);
+
+    And(a=a[3], b=notSel, out=notA3);
+    And(a=sel, b=b[3], out=notB3);
+    Or(a=notA3, b=notB3, out=out[3]);
+
+    And(a=a[4], b=notSel, out=notA4);
+    And(a=sel, b=b[4], out=notB4);
+    Or(a=notA4, b=notB4, out=out[4]);
+
+    And(a=a[5], b=notSel, out=notA5);
+    And(a=sel, b=b[5], out=notB5);
+    Or(a=notA5, b=notB5, out=out[5]);
+
+    And(a=a[6], b=notSel, out=notA6);
+    And(a=sel, b=b[6], out=notB6);
+    Or(a=notA6, b=notB6, out=out[6]);
+
+    And(a=a[7], b=notSel, out=notA7);
+    And(a=sel, b=b[7], out=notB7);
+    Or(a=notA7, b=notB7, out=out[7]);
+    
+    And(a=a[8], b=notSel, out=notA8);
+    And(a=sel, b=b[8], out=notB8);
+    Or(a=notA8, b=notB8, out=out[8]);
+
+    And(a=a[9], b=notSel, out=notA9);
+    And(a=sel, b=b[9], out=notB9);
+    Or(a=notA9, b=notB9, out=out[9]);
+
+    And(a=a[10], b=notSel, out=notA10);
+    And(a=sel, b=b[10], out=notB10);
+    Or(a=notA10, b=notB10, out=out[10]);
+    
+    And(a=a[11], b=notSel, out=notA11);
+    And(a=sel, b=b[11], out=notB11);
+    Or(a=notA11, b=notB11, out=out[11]);
+
+    And(a=a[12], b=notSel, out=notA12);
+    And(a=sel, b=b[12], out=notB12);
+    Or(a=notA12, b=notB12, out=out[12]);
+    
+    And(a=a[13], b=notSel, out=notA13);
+    And(a=sel, b=b[13], out=notB13);
+    Or(a=notA13, b=notB13, out=out[13]);
+
+    And(a=a[14], b=notSel, out=notA14);
+    And(a=sel, b=b[14], out=notB14);
+    Or(a=notA14, b=notB14, out=out[14]);
+    
+    And(a=a[15], b=notSel, out=notA15);
+    And(a=sel, b=b[15], out=notB15);
+    Or(a=notA15, b=notB15, out=out[15]);
 }
