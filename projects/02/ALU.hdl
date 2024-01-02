@@ -25,7 +25,6 @@
 // if (f == 1)  sets out = x + y  // integer 2's complement addition
 // if (f == 0)  sets out = x & y  // bitwise and
 // if (no == 1) sets out = !out   // bitwise not
-
 CHIP ALU {
     IN  
         x[16], y[16],  // 16-bit inputs        
@@ -41,5 +40,36 @@ CHIP ALU {
         ng;      // if (out < 0)  equals 1, else 0
 
     PARTS:
-    //// Replace this comment with your code.
+    // 1 step - count zx
+    Mux16(a=x, b[0..15]=false, sel=zx, out=zxX);
+
+    // 2 step - count nx
+    Not16(in=zxX, out=bitwiseNotX);
+    Mux16(a=zxX, b=bitwiseNotX, sel=nx, out=nxX);
+    
+    // 3 step - count zy
+    Mux16(a=y, b[0..15]=false, sel=zy, out=zyY);
+
+    // 4 step - count ny
+    Not16(in=zyY, out=bitwiseNotY);
+    Mux16(a=zyY, b=bitwiseNotY, sel=ny, out=nyY);
+
+    // 5 step - count f
+    Add16(a=nxX, b=nyY, out=addition);
+    And16(a=nxX, b=nyY, out=bitwiseAnd);
+    Mux16(a=bitwiseAnd, b=addition, sel=f, out=funcOut);
+
+    // 6 step - count no
+    Not16(in=funcOut, out=bitwiseFuncNot);
+    Mux16(a=funcOut, b=bitwiseFuncNot, sel=no, out=tmpOut);
+
+    // 7 step - count zr
+    Or16Way(in=tmpOut, out=o);
+    Not(in=o, out=zr);
+    
+    // 8 step - count ng
+    And16(a[0..15]=true, b=tmpOut, out[15]=ng, out[0..14]=drop);
+           
+    // // 9 step - write out
+    Mux16(a=funcOut, b=bitwiseFuncNot, sel=no, out=out);
 }
